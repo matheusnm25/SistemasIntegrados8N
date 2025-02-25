@@ -2,6 +2,7 @@
 Integrantes do Grupo:
 - Alex See Yoon Koo; RA: 10332617
 - Matheus Marques; RA: 10395894
+- Pedro Henrique Rocha; RA: 10396190
 
 
 # Dashboard de Unidades Básicas de Saúde (UBS)
