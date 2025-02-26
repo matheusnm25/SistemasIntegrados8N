@@ -25,3 +25,25 @@ estados = st.multiselect("Selecione os estados", df_freq['Estado'].unique())
 if estados:
     df_filtrado = df[df['Nome_UF'].isin(estados)]
     st.write(df_filtrado)
+
+# Gráfico de pizza
+fig = px.pie(df_freq, values='Frequência', names='Estado', title="Distribuição de UBS por Estado")
+st.plotly_chart(fig)
+
+# Contagem de UBS por município
+df_municipios = df['Nome_Município'].value_counts().reset_index()
+df_municipios.columns = ['Município', 'Frequência']
+
+# Slider para filtro de municípios
+municipios = st.slider("Número mínimo de UBS por município", 0, df_municipios['Frequência'].max(), 300)
+
+# Aplicando o filtro
+df_municipios_filtrado = df_municipios[df_municipios['Frequência'] >= municipios]
+
+# Criando o histograma filtrado
+fig2 = px.histogram(df_municipios_filtrado, x='Município', y='Frequência', 
+                    title=f'Municípios com pelo menos {municipios} UBS',
+                    labels={'Município': 'Município', 'Frequência': 'Número de UBS'},
+                    text_auto=True)
+
+st.plotly_chart(fig2)
