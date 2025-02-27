@@ -2,9 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# =============================
-# 1) LEITURA E PREPARAÇÃO DOS DADOS
-# =============================
 df = pd.read_csv("ubs_atualizado.csv", sep=";")
 
 # Limpa espaços extras na coluna Nome_UF
@@ -18,9 +15,6 @@ df['LONGITUDE'] = df['LONGITUDE'].astype(str).str.replace(',', '.')
 df['LATITUDE'] = pd.to_numeric(df['LATITUDE'], errors='coerce')
 df['LONGITUDE'] = pd.to_numeric(df['LONGITUDE'], errors='coerce')
 
-# =============================
-# 2) CRIAÇÃO DOS GRÁFICOS INICIAIS
-# =============================
 st.title("Dashboard de Unidades Básicas de Saúde (UBS)")
 
 # -- Freq. de UBS por Estado
@@ -68,10 +62,6 @@ fig_hist = px.histogram(
     text_auto=True
 )
 st.plotly_chart(fig_hist)
-
-# =============================
-# 3) MAPA INTERATIVO COM FILTRO LATERAL
-# =============================
 
 # Filtro na barra lateral para selecionar o estado
 estado_selecionado = st.sidebar.selectbox(
